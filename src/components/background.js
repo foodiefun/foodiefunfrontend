@@ -1,11 +1,19 @@
-import React from 'react'
+import React from 'react';
+// import Fork from './Fork.png';
 
-function background() {
+function Background() {
   return (
-    <div>
-      background works!!
+    <div >
+      background working
+   
     </div>
-  )
+  );
 }
 
-export default background
+export default Background;
+
+// const imgStyle={
+//   background:'url(https://images.pexels.com/photos/262896/pexels-photo-262896.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)',
+//   backgroundRepeat: 'none',
+//   height: '1200px'
+// }
