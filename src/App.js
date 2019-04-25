@@ -7,7 +7,7 @@ import AddNew from './components/AddNew';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={AppStyle}>
       <Login />
       <Main />
       <AddNew />
@@ -16,3 +16,8 @@ function App() {
 }
 
 export default App;
+
+const AppStyle={
+  margin:'auto',
+  textAlign:'center',
+}
