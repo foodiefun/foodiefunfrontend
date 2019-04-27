@@ -1,12 +1,31 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+
+import { login } from '../actions/index';
+import { connect } from 'react-redux';
 
 export class LoginForm extends Component {
+  state = {
+    credentials: {
+      username: '',
+      password: ''
+    }
+  };
 
+  handleChange = e => {
+    this.setState({
+      credentials: {
+        ...this.state.credentials,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
 
-
-
-
-
+  handleLogin = e => {
+    e.preventDefault();
+    this.props
+      .login(this.state.credential)
+      .then(() => this.props.history.push('/home'));
+  };
 
   render() {
     return (
@@ -16,14 +35,14 @@ export class LoginForm extends Component {
             <input
               type="text"
               name="username"
-              // value={this.state.credentials.username}
+              value={this.state.credentials.username}
               onChange={this.handleChange}
               placeholder="Username"
             />
             <input
               type="text"
               name="password"
-              // value={this.state.credentials.password}
+              value={this.state.credentials.password}
               onChange={this.handleChange}
               placeholder="Password"
             />
@@ -40,11 +59,19 @@ export class LoginForm extends Component {
             </button>
             {this.props.error && <p className="error">{this.props.error}</p>}
             <p>Forgot your Password?</p>
+            <button>Create Account</button>
           </form>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default LoginForm
+const mapStateToProps = ({ error }) => ({
+  error
+});
+
+export default connect(
+  mapStateToProps,
+  { login }
+)(LoginForm);
