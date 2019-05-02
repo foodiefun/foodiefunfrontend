@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+// import React, { Component } from 'react'
 
-export class UploadPic extends Component {
-  render() {
-    return (
-      <div>
-        Uploadpic works
-      </div>
-    )
-  }
-}
+// export class UploadPic extends Component {
+//   render() {
+//     return (
+//       <div>
+//         Uploadpic works
+//       </div>
+//     )
+//   }
+// }
 
-export default UploadPic
+// export default UploadPic

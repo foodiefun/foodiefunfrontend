@@ -8,14 +8,14 @@ export const FOODIE_ADDED = 'FOODIE_ADDED';
 export const FOODIE_DELETE = 'FOODIE_ADDED';
 export const FOODIE_UNAUTH = 'FOODIE_UNAUTH';
 
-const URL = 'http://localhost:5000/api/restaurants';
 
-export const getData = data => {
-  return dispatch => {
+// const URL = 'https://api.openbrewerydb.org/breweries'
+
+export const getData =() => dispatch =>{
     dispatch({ type: FOODIE_FETCH });
 
     axios
-      .get('http://localhost:5000/api/restaurants', {
+      .get(`https://foodiefun.com/api/user/review`, {
         headers: { Authorization: localStorage.getItem('token') }
       })
       .then(res => {
@@ -28,30 +28,32 @@ export const getData = data => {
       .catch(err => {
         console.log(err);
         if (err.response.status === 403) {
-          dispatch({
-            type: FOODIE_ERROR,
-            payload: err
-          });
+          dispatch({ type: FOODIE_UNAUTH, payload: err.response });
         } else {
-          dispatch({ type: FOODIE_UNAUTH, payload: err });
+          dispatch({ type: FOODIE_ERROR , payload: err.response });
         }
       });
   };
-};
 
+
+
+
+
+  // LOGIN
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
 export const login = creds => dispatch => {
-  dispatch({ type: LOGIN_START });
+ dispatch({ type: LOGIN_START });
 
   return axios
-    .post('http://localhost5000/api/login', creds)
+    .post(`https://foodiefun.com/api/user/${id}/reviews`, creds)
     .then(res => {
       console.log(res);
       localStorage.setItem('token', res.data.payload);
       dispatch({ type: LOGIN_SUCCESS, payload: res.data.payload });
+      
     })
     .catch(err => {
       console.log('login err: ', err);
@@ -63,12 +65,13 @@ export const login = creds => dispatch => {
 };
 
 
+//ADD
 
 export const addFoodie = foodie => dispatch => {
   dispatch({ type: FOODIE_ADD });
 
   axios
-    .post(URL, foodie)
+    .post(`https://foodiefun.com/api/user/review`, foodie)
     .then(res => {
       dispatch({ type: FOODIE_ADD, payload: res.data });
     })
@@ -77,8 +80,10 @@ export const addFoodie = foodie => dispatch => {
     });
 };
 
+
+//EDIT
 export const updateFoodie = foodie => dispatch => {
-  axios.put('URL/foodie', foodie).then(res =>
+  axios.put(`https://foodiefun.com/api/user/review`, foodie).then(res =>
     dispatch({
       type: 'FOODIE_UPDATE',
       payload: res.data
@@ -86,10 +91,11 @@ export const updateFoodie = foodie => dispatch => {
   );
 };
 
+//DELETE
 export const deletePost = id => {
   return dispatch => {
     return axios
-      .get(URL)
+      .delete(`https://foodiefun.com/api/user/${id}/reviews`)
       .then(res => {
         dispatch({ type: FOODIE_DELETE, payload: res.data });
       })
@@ -98,3 +104,7 @@ export const deletePost = id => {
       });
   };
 };
+
+//REGISTER
+
+

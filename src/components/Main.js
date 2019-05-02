@@ -7,20 +7,31 @@ import Edit from './Edit';
 import { connect } from 'react-redux';
 import { getData } from '../actions';
 
+// import  fetchReducer from '../reducers';
+
 export class Main extends Component {
+
   componentDidMount() {
     this.props.getData();
   }
 
   render() {
+    // console.log(this.props.restaurants)
     return (
       <div>
-        {this.props.restaurants.map(rest => (
-          <div key={rest.id}>
-            <h2>{rest.name}</h2>
+        {this.props.restaurants.map(post => (
+          <div>
+            <h2>{post.restaurantName}</h2>
+            <img src={post.photo} alt='alt' style={imageStyle} />
+            <p>Date Visited - {post.date}</p>
+            <p>Price {post.price}</p>
+            <p>Rating {post.rating}</p>
+            <h4>Restaurant Info</h4>
+            <p>{post.restaurantInfo}</p>
           </div>
         ))}
-        Main Works!!
+        Main Workz!!
+      
         <SortMenu />
         <Delete />
         <Edit />
@@ -29,12 +40,18 @@ export class Main extends Component {
   }
 }
 
-const mapStateToProps = ({ restaurants }) => ({
-  restaurants
-});
+const mapStateToProps = state => {
+  return {
+    restaurants: state.fetchReducer.restaurants,
+    foodieFetch: state.foodieFetch
+    
+  };
+};
 
-export default connect(
-  mapStateToProps,
-  { getData }
-)(Main);
+export default connect(mapStateToProps,{ getData} )(Main);
+
+const imageStyle = {
+  width: '400px',
+  height: '300px'
+}
 
