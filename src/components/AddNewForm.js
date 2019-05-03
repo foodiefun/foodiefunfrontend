@@ -43,7 +43,8 @@ export class AddNewForm extends Component {
       selectedFile: null,
       photo: '',
       favorite: '',
-      id: 1
+      id: null,
+      userId: null
     };
   }
 
@@ -79,17 +80,18 @@ export class AddNewForm extends Component {
     let data = { ...this.state };
     this.props.addFoodie(data);
     this.setState({
-      restaurantName: '',
-      date: '',
-      foodType: '',
-      price: '',
-      rating: '',
-      comments: '',
-      restaurantInfo: '',
+      restaurantName: this.props.restaurantName,
+      date: this.props.date,
+      foodType: this.props.foodType,
+      price: this.props.price,
+      rating: this.props.rating,
+      comments: this.props.comments,
+      restaurantInfo: this.props.restaurantInfo,
       selectedFile: null,
-      photo: '',
-      favorite: '',
-      id: 1
+      photo: this.props.photo,
+      favorite: this.props.favorite,
+      id: this.props.id,
+      userId: null
     });
   };
 
@@ -99,7 +101,8 @@ export class AddNewForm extends Component {
   fileSelectedHandler = event => {
     console.log(event.target.files[0]);
     this.setState({
-      selectedFile: event.target.files[0]
+      selectedFile: event.target.files[0],
+
     });
   };
 
@@ -107,7 +110,7 @@ export class AddNewForm extends Component {
     const fd = new FormData();
     fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
     axios
-      .post(`https://foodiefun.herokuapp.com/api/review/${this.state.id}/images`, fd, {
+      .post(`https://foodiefun.herokuapp.com/api/review/1/images`, fd, {
         onUploadProgress: progressEvent =>
           console.log(
             'UploadProgress: ' +

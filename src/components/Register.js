@@ -1,45 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { registerUser } from '../actions/authentication';
+// import { registerUser } from '../actions/Authentication';
+import { register } from './AxiosLogin';
 import classnames from 'classnames';
-import Axios from 'axios';
+// import Axios from 'axios';
 
 class Register extends Component {
   constructor() {
     super();
     this.state = {
-      name: '',
-      email: '',
+      username: '',
       password: '',
-      password_confirm: '',
       errors: {}
     };
   }
 
   handleInputChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const user = {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-      password_confirm: this.state.password_confirm
+
+    const newUser = {
+      username: this.state.username,
+      password: this.state.password
+      //   password_confirm: this.state.password_confirm
     };
 
-    Axios.post(`https://foodiefun.herokuapp.com/api/register`, register)
-      .then(response => {
-        this.setState({ isRegistered: true });
-      })
-      .catch(error => {
-        console.log('Error registering worker: ', error);
-      });
+    register(newUser).then(res => {
+      this.props.history.push('/login');
+    });
   };
 
   // componentWillReceiveProps(nextProps) {
@@ -53,11 +46,11 @@ class Register extends Component {
   //     }
   // }
 
-  componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/');
-    }
-  }
+//   componentDidMount() {
+//     // if (this.props.auth.isAuthenticated) {
+//     //   this.props.history.push('/');
+//     // }
+//   }
 
   render() {
     const { errors } = this.state;
@@ -68,40 +61,20 @@ class Register extends Component {
           <div className="form-group">
             <input
               type="text"
-              placeholder="Name"
-              className={classnames('form-control form-control-lg', {
-                'is-invalid': errors.name
-              })}
-              name="name"
+              placeholder="Username"
+              name="username"
               onChange={this.handleInputChange}
-              value={this.state.name}
+              value={this.state.username}
             />
             {errors.name && (
               <div className="invalid-feedback">{errors.name}</div>
             )}
           </div>
-          <div className="form-group">
-            <input
-              type="email"
-              placeholder="Email"
-              className={classnames('form-control form-control-lg', {
-                'is-invalid': errors.email
-              })}
-              name="email"
-              onChange={this.handleInputChange}
-              value={this.state.email}
-            />
-            {errors.email && (
-              <div className="invalid-feedback">{errors.email}</div>
-            )}
-          </div>
+           
           <div className="form-group">
             <input
               type="password"
               placeholder="Password"
-              className={classnames('form-control form-control-lg', {
-                'is-invalid': errors.password
-              })}
               name="password"
               onChange={this.handleInputChange}
               value={this.state.password}
@@ -111,19 +84,7 @@ class Register extends Component {
             )}
           </div>
           <div className="form-group">
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              className={classnames('form-control form-control-lg', {
-                'is-invalid': errors.password_confirm
-              })}
-              name="password_confirm"
-              onChange={this.handleInputChange}
-              value={this.state.password_confirm}
-            />
-            {errors.password_confirm && (
-              <div className="invalid-feedback">{errors.password_confirm}</div>
-            )}
+           
           </div>
           <div className="form-group">
             <button type="submit" className="btn btn-primary">
@@ -136,17 +97,17 @@ class Register extends Component {
   }
 }
 
-Register.propTypes = {
-  registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
-};
+// Register.propTypes = {
+//   registerUser: PropTypes.func.isRequired,
+//   auth: PropTypes.object.isRequired
+// };
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  errors: state.errors
-});
+// const mapStateToProps = state => ({
+//   auth: state.auth,
+//   errors: state.errors
+// });
 
 export default connect(
-  mapStateToProps,
-  { registerUser }
+  null,
+  { register }
 )(withRouter(Register));

@@ -5,11 +5,11 @@ import logooffwhite from '../assets/logooffwhite.svg';
 import '../App.css';
 
 
-function Login() {
+function Login(props) {                                 
   return (
     <div style={bglogin} >
       <img src={logooffwhite} alt="" style={logo} className='App-logo'/>
-      <LoginForm />
+      <LoginForm history={props.history} />
      
     </div>
   )

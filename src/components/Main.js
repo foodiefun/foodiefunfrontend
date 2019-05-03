@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
 import SortMenu from './SortMenu';
-import Delete from './Delete';
-import Edit from './Edit';
+// import Delete from './Delete';
+// import Edit from './Edit';
 // import { withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { getData } from '../actions';
+import jwt_decode from 'jwt-decode';
 
 // import  fetchReducer from '../reducers';
 
 export class Main extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      name: '',
+      email: '',
+      errors: {}
+    };
+  }
 
   componentDidMount() {
-    this.props.getData();
+    const token = localStorage.usertoken;
+    const decoded = jwt_decode(token);
+    this.setState({
+      name: decoded.name,
+      email: decoded.email
+    });
   }
 
   render() {
@@ -20,9 +35,9 @@ export class Main extends Component {
     return (
       <div>
         {this.props.restaurants.map(post => (
-          <div>
+          <div key={post.id}>
             <h2>{post.restaurantName}</h2>
-            <img src={post.photo} alt='alt' style={imageStyle} />
+            <img src={post.photo} alt="alt" style={imageStyle} />
             <p>Date Visited - {post.date}</p>
             <p>Price {post.price}</p>
             <p>Rating {post.rating}</p>
@@ -31,10 +46,8 @@ export class Main extends Component {
           </div>
         ))}
         Main Workz!!
-      
         <SortMenu />
-        <Delete />
-        <Edit />
+        {/* <Delete /> */}
       </div>
     );
   }
@@ -44,14 +57,15 @@ const mapStateToProps = state => {
   return {
     restaurants: state.fetchReducer.restaurants,
     foodieFetch: state.foodieFetch
-    
   };
 };
 
-export default connect(mapStateToProps,{ getData} )(Main);
+export default connect(
+  mapStateToProps,
+  { getData }
+)(Main);
 
 const imageStyle = {
   width: '400px',
   height: '300px'
-}
-
+};

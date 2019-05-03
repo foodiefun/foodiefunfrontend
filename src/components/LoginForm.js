@@ -1,34 +1,39 @@
 import React, { Component } from 'react';
 
-import { connect } from 'react-redux';
-import { login } from '../actions/index';
+import { login } from './AxiosLogin';
 
+import { connect } from 'react-redux';
+// import { login } from '../actions/index';
+import { Link } from 'react-router-dom';
 
 export class LoginForm extends Component {
-  state = {
-    credentials: {
-      username: '',
-      password: ''
-      
-    }
-  };
+  constructor() {
+    super();
 
+    this.state = {
+      username: '',
+      password: '',
+      errors: {},
+      userId: null
+    };
+  }
   handleChange = e => {
-    this.setState({
-      credentials: {
-        ...this.state.credentials,
-        [e.target.name]: e.target.value
-      }
-    });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   handleLogin = e => {
     e.preventDefault();
-    this.props
-      .login(this.state.credentials)
-       .then(() => console.log('logged in!'));
-      //  .then(() => this.props.history.push('/protected'));
-       //the problem is here
+    console.log('login!!')
+    const user = {
+      username: this.state.username,
+      password: this.state.password
+    };
+
+    login(user).then(res => {
+      if (res) {
+        this.props.history.push('/');
+      }
+    });
   };
 
   render() {
@@ -36,10 +41,10 @@ export class LoginForm extends Component {
       <div>
         <div className="loginform">
           <form onSubmit={this.handleLogin} style={loginform}>
-          <input
+            <input
               type="text"
               name="username"
-              value={this.state.credentials.username}
+              value={this.state.username}
               onChange={this.handleChange}
               placeholder="Username"
               style={inputStyle}
@@ -47,12 +52,14 @@ export class LoginForm extends Component {
             <input
               type="text"
               name="password"
-              value={this.state.credentials.password}
+              value={this.state.password}
               onChange={this.handleChange}
               placeholder="Password"
               style={inputStyle}
             />
-            <button> Login
+            <button>
+              {' '}
+              Login
               {/* {this.props.isLoggingIn ? (
                 <img
                   src="https://ya-webdesign.com/images/minimalist-transparent-loading-gif-11.gif"
@@ -65,7 +72,9 @@ export class LoginForm extends Component {
             </button>
             {this.props.error && <p className="error">{this.props.error}</p>}
             <p>Forgot your Password?</p>
-            <button>Create Account</button>
+            <button>
+              <Link to="/register">Create Account</Link>
+            </button>
           </form>
         </div>
       </div>
@@ -83,19 +92,13 @@ export default connect(
   { login }
 )(LoginForm);
 
-
-
-
-const loginform ={
+const loginform = {
   display: 'flex',
-  flexDirection:'column',
+  flexDirection: 'column',
   justifyContent: 'center',
   width: '250px',
   margin: 'auto',
-  marginTop: '80px',
-}
+  marginTop: '80px'
+};
 
-const inputStyle ={
-
-}
-
+const inputStyle = {};

@@ -8,23 +8,29 @@ import AddNew from './components/AddNew';
 import Nav from './components/Nav';
 import NavBottom from './components/NavBottom';
 import Edit from './components/Edit';
+import Register from './components/Register'
+
 
 function App() {
   return (
-    <div className="App" style={AppStyle}>
-    <Nav/>
-      <Router>
-        <Route exact path="/" component={Login} />
-        {/* <Login /> */}
-       
-        <Route exact path="/edit" component={Edit} /> 
-        <Route exact path='/home' component={Main}/>
-        {/* <Main /> */}
+    <Router>
+      <div className="App" style={AppStyle}>
+        <Nav />
+
+        <Route exact path="/login" render={(props)=>(
+          <Login {...props} />
+        )} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/" component={Main} />
+        <Route exact path="/edit" component={Edit} />
         <Route exact path="/add-new" component={AddNew} />
-        {/* <AddNew /> */}
-      </Router>
-      <NavBottom/>
-    </div>
+        <Route
+          exact
+          path={['/', '/edit', '/add-new']}
+          component={NavBottom}
+        />
+      </div>
+    </Router>
   );
 }
 

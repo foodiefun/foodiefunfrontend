@@ -9,13 +9,15 @@ export const FOODIE_DELETE = 'FOODIE_ADDED';
 export const FOODIE_UNAUTH = 'FOODIE_UNAUTH';
 
 
-// const URL = 'https://api.openbrewerydb.org/breweries'
 
-export const getData =() => dispatch =>{
+
+
+export const getData = (id) => dispatch =>{
+  const URL = `https://foodiefun.herokuapp.com/api/user/1/reviews`
     dispatch({ type: FOODIE_FETCH });
 
     axios
-      .get(`https://foodiefun.com/api/user/review`, {
+      .get(URL, {
         headers: { Authorization: localStorage.getItem('token') }
       })
       .then(res => {
@@ -39,30 +41,30 @@ export const getData =() => dispatch =>{
 
 
 
-  // LOGIN
-export const LOGIN_START = 'LOGIN_START';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+//   // LOGIN
+// export const LOGIN_START = 'LOGIN_START';
+// export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+// export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
-export const login = creds => dispatch => {
- dispatch({ type: LOGIN_START });
+// export const login = creds => dispatch => {
+//  dispatch({ type: LOGIN_START });
 
-  return axios
-    .post(`https://foodiefun.com/api/user/${id}/reviews`, creds)
-    .then(res => {
-      console.log(res);
-      localStorage.setItem('token', res.data.payload);
-      dispatch({ type: LOGIN_SUCCESS, payload: res.data.payload });
+//   return axios
+//     .post(URL, creds)
+//     .then(res => {
+//       console.log(res);
+//       localStorage.setItem('token', res.data.payload);
+//       dispatch({ type: LOGIN_SUCCESS, payload: res.data.payload });
       
-    })
-    .catch(err => {
-      console.log('login err: ', err);
-      if (err.response && err.response.status === 403) {
-        localStorage.removeItem('token');
-      }
-      dispatch({ type: LOGIN_FAILURE });
-    });
-};
+//     })
+//     .catch(err => {
+//       console.log('login err: ', err);
+//       if (err.response && err.response.status === 403) {
+//         localStorage.removeItem('token');
+//       }
+//       dispatch({ type: LOGIN_FAILURE });
+//     });
+// };
 
 
 //ADD
@@ -71,7 +73,7 @@ export const addFoodie = foodie => dispatch => {
   dispatch({ type: FOODIE_ADD });
 
   axios
-    .post(`https://foodiefun.com/api/user/review`, foodie)
+    .post(`https://foodiefun.herokuapp.com/api/user/1/review`, foodie)
     .then(res => {
       dispatch({ type: FOODIE_ADD, payload: res.data });
     })
@@ -83,7 +85,7 @@ export const addFoodie = foodie => dispatch => {
 
 //EDIT
 export const updateFoodie = foodie => dispatch => {
-  axios.put(`https://foodiefun.com/api/user/review`, foodie).then(res =>
+  axios.put(`https://foodiefun.herokuapp.com/api/user/1/review`, foodie).then(res =>
     dispatch({
       type: 'FOODIE_UPDATE',
       payload: res.data
@@ -95,7 +97,7 @@ export const updateFoodie = foodie => dispatch => {
 export const deletePost = id => {
   return dispatch => {
     return axios
-      .delete(`https://foodiefun.com/api/user/${id}/reviews`)
+      .delete(`https://foodiefun.herokuapp.com/api/user/${id}/reviews`)
       .then(res => {
         dispatch({ type: FOODIE_DELETE, payload: res.data });
       })
