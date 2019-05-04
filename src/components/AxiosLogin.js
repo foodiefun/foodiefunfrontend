@@ -7,6 +7,7 @@ export const register = newUser => {
     password: newUser.password
   })
   .then(response => {
+    localStorage.setItem('userId', response.data.id)
     console.log(response)
   })
   .catch(err =>{
@@ -21,7 +22,8 @@ export const login = user => {
     password: user.password
   })
   .then(response =>{
-    localStorage.setItem('usertoken', response.data.token)
+    localStorage.setItem('token', response.data.token)
+
     return response.data.token
   })
   .catch(err=> {

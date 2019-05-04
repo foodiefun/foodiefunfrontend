@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+
 import { withRouter } from 'react-router-dom';
 // import { registerUser } from '../actions/Authentication';
 import { register } from './AxiosLogin';
-import classnames from 'classnames';
-// import Axios from 'axios';
+
+
 
 class Register extends Component {
   constructor() {
@@ -27,7 +27,6 @@ class Register extends Component {
     const newUser = {
       username: this.state.username,
       password: this.state.password
-      //   password_confirm: this.state.password_confirm
     };
 
     register(newUser).then(res => {
@@ -35,22 +34,7 @@ class Register extends Component {
     });
   };
 
-  // componentWillReceiveProps(nextProps) {
-  //     if(nextProps.auth.isAuthenticated) {
-  //         this.props.history.push('/')
-  //     }
-  //     if(nextProps.errors) {
-  //         this.setState({
-  //             errors: nextProps.errors
-  //         });
-  //     }
-  // }
-
-//   componentDidMount() {
-//     // if (this.props.auth.isAuthenticated) {
-//     //   this.props.history.push('/');
-//     // }
-//   }
+ 
 
   render() {
     const { errors } = this.state;
@@ -97,15 +81,7 @@ class Register extends Component {
   }
 }
 
-// Register.propTypes = {
-//   registerUser: PropTypes.func.isRequired,
-//   auth: PropTypes.object.isRequired
-// };
 
-// const mapStateToProps = state => ({
-//   auth: state.auth,
-//   errors: state.errors
-// });
 
 export default connect(
   null,

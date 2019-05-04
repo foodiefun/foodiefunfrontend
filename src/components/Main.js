@@ -5,14 +5,15 @@ import SortMenu from './SortMenu';
 // import { withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { getData } from '../actions';
+import { getData, deletePost } from '../actions';
 import jwt_decode from 'jwt-decode';
 
 // import  fetchReducer from '../reducers';
 
+
 export class Main extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       name: '',
@@ -22,14 +23,17 @@ export class Main extends Component {
   }
 
   componentDidMount() {
-    const token = localStorage.usertoken;
+this.props.getData();
+    const token = localStorage.getItem('token')
     const decoded = jwt_decode(token);
     this.setState({
       name: decoded.name,
       email: decoded.email
+     
     });
   }
 
+ 
   render() {
     // console.log(this.props.restaurants)
     return (
@@ -38,6 +42,8 @@ export class Main extends Component {
           <div key={post.id}>
             <h2>{post.restaurantName}</h2>
             <img src={post.photo} alt="alt" style={imageStyle} />
+            <button>DELETE</button>
+            
             <p>Date Visited - {post.date}</p>
             <p>Price {post.price}</p>
             <p>Rating {post.rating}</p>
@@ -56,13 +62,20 @@ export class Main extends Component {
 const mapStateToProps = state => {
   return {
     restaurants: state.fetchReducer.restaurants,
-    foodieFetch: state.foodieFetch
+    foodieFetch: state.foodieFetch,
+    foodieError: state.foodieError,
   };
 };
 
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     delete: todoText => dispatch({type: 'FOODIE_DELETE', payload: todoText })
+//   }
+// }
+
+
 export default connect(
-  mapStateToProps,
-  { getData }
+  mapStateToProps,{getData, deletePost}
 )(Main);
 
 const imageStyle = {

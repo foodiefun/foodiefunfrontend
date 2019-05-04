@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class NavBottom extends Component {
 logOut(e){
@@ -13,7 +13,7 @@ logOut(e){
 render() {
    return(
     <div style={navb}>
-    <Link to='/home'> <i className="fas fa-home"></i></Link>
+    <Link to='/'> <i className="fas fa-home"></i></Link>
     <Link to='/add-new'> <i className="fas fa-plus-circle"></i></Link>
     <Link to="/edit"> <i className="far fa-edit"></i></Link>
      <i className="fas fa-sign-out-alt" onClick={this.logOut.bind(this)}></i>

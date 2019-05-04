@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Select from 'react-select';
 import { connect } from 'react-redux';
 import { addFoodie } from '../actions';
-import { browserHistory } from 'react-router';
+
 
 
 
