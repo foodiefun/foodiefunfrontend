@@ -31,3 +31,22 @@
     transform: rotate(360deg);
   }
 }
+
+.heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+}
+
+.postText {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.delete {
+  font-family: 'Open Sans', sans-serif;
+  background: none;
+ 
+}
+
+.edit {
+  text-decoration: none;
+}

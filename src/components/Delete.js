@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { Component } from 'react'
+import {connect} from 'react-redux';
+import { deletePost } from '../actions';
+import '../App.css';
 
-export default function Delete(props) {
-  return (
-    <div>
-      <button onClick={()=>}>Delete</button>
-    </div>
-  )
+
+class Delete extends Component {
+
+deletePost = e => {
+  this.props.deletePost(this.props.id)
 }
+
+  render() {
+    return (
+      <div>
+         <button className='delete' onClick={()=>this.deletePost()}>Delete</button>
+      </div>
+    )
+  }
+}
+
+export default connect(null, {deletePost})(Delete)

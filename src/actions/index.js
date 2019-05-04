@@ -7,6 +7,8 @@ export const FOODIE_ADD = 'FOODIE_ADD';
 export const FOODIE_ADDED = 'FOODIE_ADDED';
 export const FOODIE_DELETE = 'FOODIE_ADDED';
 export const FOODIE_UNAUTH = 'FOODIE_UNAUTH';
+export const FOODIE_UPDATE = 'FOODIE_UPDATE';
+export const SEARCH = "SEARCH";
 
 let id = localStorage.getItem('userId');
 
@@ -79,7 +81,7 @@ export const addFoodie = foodie => dispatch => {
 };
 
 //EDIT
-export const updateFoodie = foodie => dispatch => {
+export const updateFoodie = (id, foodie) => dispatch => {
   axios
     .put(`https://foodiefun.herokuapp.com/api/user/${id}/review`, foodie, {
       headers: { Authorization: localStorage.getItem('token') }
@@ -89,23 +91,29 @@ export const updateFoodie = foodie => dispatch => {
         type: 'FOODIE_UPDATE',
         payload: res.data
       })
-    );
+    )
+    .catch(err => {
+      dispatch({ type: FOODIE_ERROR, payload: err });
+    });
 };
 
 //DELETE
-export const deletePost = id => {
-  return dispatch => {
-    return axios
-      .delete(`https://foodiefun.herokuapp.com/api/user/${id}/reviews`, {
-        headers: { Authorization: localStorage.getItem('token') }
-      })
-      .then(res => {
-        dispatch({ type: FOODIE_DELETE, payload: res.data });
-      })
-      .catch(err => {
-        dispatch({ type: FOODIE_ERROR, payload: err });
-      });
-  };
+export const deletePost = id => dispatch => {
+  axios
+    .delete(`https://foodiefun.herokuapp.com/api/review/${id}`, {
+      headers: { Authorization: localStorage.getItem('token') }
+    })
+    .then(res => {
+      dispatch({ type: FOODIE_DELETE, payload: res.data });
+      dispatch(getData())
+    })
+    .catch(err => {
+      dispatch({ type: FOODIE_ERROR, payload: err });
+    });
 };
 
-//REGISTER
+//SEARCH
+
+export function searchPosts(payload) {
+  return { type: SEARCH, payload };
+}

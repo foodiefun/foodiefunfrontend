@@ -15,7 +15,7 @@ render() {
     <div style={navb}>
     <Link to='/'> <i className="fas fa-home"></i></Link>
     <Link to='/add-new'> <i className="fas fa-plus-circle"></i></Link>
-    <Link to="/edit"> <i className="far fa-edit"></i></Link>
+    {/* <Link to="/edit"> <i className="far fa-edit"></i></Link> */}
      <i className="fas fa-sign-out-alt" onClick={this.logOut.bind(this)}></i>
    </div>
 

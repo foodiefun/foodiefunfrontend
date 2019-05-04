@@ -1,13 +1,14 @@
 import {FOODIE_ADD} from '../actions';
 import {FOODIE_ADDED } from '../actions';
 import { FOODIE_DELETE } from '../actions';
+import {FOODIE_UPDATE} from '../actions';
 // import {browserHistory} from 'react-router';
 // import { browserRouter, Link, Route } from 'react-router-dom';
 
 const initialState = {
     restaurant: [],
     foodieAdd: false,
-    foodieAdded: false
+    foodieAdded: false 
 };
 
 
@@ -22,9 +23,15 @@ export const addReducer = (state = initialState , action) => {
           return {
             ...state, 
             restaurant: [...state.restaurant.filter(r => r.id !== action.id)]
-        
-          }
+          
+          };
         }
+          case FOODIE_UPDATE : {
+              return state.map(post => {
+                  return post.id === action.restaurant.id ? action.newPost : post;
+              })
+          }
+        
 
         default:
         return state;

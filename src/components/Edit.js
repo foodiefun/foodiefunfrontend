@@ -1,41 +1,33 @@
+import React, { Component } from 'react'
+import {connect} from 'react-redux';
+import { updateFoodie } from '../actions';
+import {Link} from 'react-router-dom';
 import EditForm from './EditForm';
 
-
-
-
-import React, { Component } from 'react'
-
 class Edit extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      restaurantName: this.props.name,
-      date: this.props.date,
-      foodType: this.props.restTypes,
-      price: this.props.price,
-      rating: this.props.rating,
-      comments: this.props.comments,
-      restaurantInfo: this.props.info,
-      photo: this.props.photo,
-      favorite: this.props.favorite,
-      id: 1
-    };
-  }
-  
+constructor(props){
+  super(props);
 
-
-  render() {
-    return (
-      <div>
-        <EditForm editprops={this.state.props}/>
-        edit works!
-      </div>
-    )
-  }
 }
 
 
-export default Edit;
+  editPost = e => {
+    this.props.updateFoodie(this.props.id)
+  }
+  
+    render() {
+      // const post_id = this.props.
+      // const posts = this.props.location.state 
+      const post = this.props.posts.filter(p => p.id !== this.props.match.params.id)[0]
+      console.log(post)
+      return (
+        <>
+            {this.props.posts.length ? <EditForm post={post}/> : null}
 
-
-
+        </>
+      )
+    }
+  }
+  
+  export default connect(null, {updateFoodie})(Edit)
+  

@@ -1,37 +1,14 @@
 import React, { Component } from 'react';
-// import Select from 'react-select';
+
 import { connect } from 'react-redux';
 import { addFoodie } from '../actions';
 import {Link} from 'react-router-dom';
-// import {Link} from 'react-router';
-// import axios from 'axios';
+
 
 const foobar = localStorage.getItem('userId')
 
 
-const restTypes = [
-  { value: 'Vegetarian', label: 'Vegetarian' },
-  { value: 'Fine Dining', label: 'Fine Dining' },
-  { value: 'Asian', label: 'Asian' },
-  { value: 'Bar-Tavern', label: 'Bar-Tavern' },
-  { value: 'Italian-French', label: 'Italian-French' },
-  { value: 'Other', label: 'Other' }
-];
 
-const price = [
-  { value: '$', label: '$' },
-  { value: '$$', label: '$$' },
-  { value: '$$$', label: '$$$' },
-  { value: '$$$$', label: '$$$$' },
-  { value: '$$$$$', label: '$$$$$' }
-];
-const rating = [
-  { value: '*', label: '*' },
-  { value: '***', label: '***' },
-  { value: '***', label: '***' },
-  { value: '****', label: '****' },
-  { value: '****', label: '⭐⭐⭐⭐⭐' }
-];
 export class AddNewForm extends Component {
   constructor() {
     super();
@@ -56,27 +33,6 @@ export class AddNewForm extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
-  };
-
-  selectChange = selectedOption => {
-    this.setState({
-      restTypes
-    });
-    console.log(`Option selected: ${selectedOption}`);
-  };
-
-  selectChangeTwo = selectedOptionTwo => {
-    this.setState({
-      price
-    });
-    console.log(`Option selected: ${selectedOptionTwo}`);
-  };
-
-  selectChangeThree = selectedOptionThree => {
-    this.setState({
-      rating
-    });
-    console.log(`Option selected: ${selectedOptionThree}`);
   };
 
 
@@ -105,21 +61,7 @@ export class AddNewForm extends Component {
       userId: foobar
     });
 
-    let data = {
-      // id: 180948594570,
-      // restaurantName: "Archive",
-      // photo: "https://assets3.thrillist.com/v1/image/2797371/size/tmg-article_default_mobile.jpg",
-      // foodName: "Chilean Sea Bass",
-      // foodType: "Seafood",
-      // comments: "Best bass I have ever eaten",
-      // rating: 5,
-      // price: 3,
-      // date: "4-29-2019",
-      // restaurantInfo: "12345 Main Street, Salem, Oregon 97303",
-      // favorite: true,
-      // userId: 9
-      ...this.state
-    } ;
+    let data = {...this.state} ;
     this.props.addFoodie(data);
     
    
@@ -129,35 +71,10 @@ export class AddNewForm extends Component {
 
 
 
-  // fileSelectedHandler = event => {
-  //   console.log(event.target.files[0]);
-  //   this.setState({
-  //     selectedFile: event.target.files[0],
 
-  //   });
-  // };
-
-  // fileUploadHandler = () => {
-  //   const fd = new FormData();
-  //   fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
-  //   axios
-  //     .post(`https://foodiefun.herokuapp.com/api/review/1/images`, fd, {
-  //       onUploadProgress: progressEvent =>
-  //         console.log(
-  //           'UploadProgress: ' +
-  //             Math.round((progressEvent.loaded / progressEvent.total) * 100) +
-  //             '%'
-  //         )
-  //     })
-  //     .then(res => {
-  //       console.log(res);
-  //     });
-  // };
 
   render() {
-    // const { selectedOption } = this.state;
-    // const { selectedOptionTwo } = this.state;
-    // const { selectedOptionThree } = this.state;
+   
     return (
       <div>
         <form style={formStyle} onSubmit={this.addReview}>
@@ -185,6 +102,22 @@ export class AddNewForm extends Component {
             value={this.state.foodType}
             onChange={this.handleChange}
           />
+          {/* <label>
+            <input type='radio' value='option1' checked={this.state.foodType === 'Chinese'}  onChange={this.handleChange}/>
+            Chinese
+          </label>
+          <label>
+          <input type='radio' value='option2' checked={this.state.foodType === 'Mexican'} onChange={this.handleChange}/>
+            Mexican
+          </label>
+          <label>
+          <input type='radio' value='option3' checked={this.state.foodType === 'Italian'} onChange={this.handleChange}/>
+            Italian
+          </label> */}
+
+          
+
+
             <input
             type="number"
             name="Price"
@@ -210,18 +143,7 @@ export class AddNewForm extends Component {
             onChange={this.handleChange}
           />
 
-          {/* <Select
-            options={price}
-            placeholder="Price"
-            value={selectedOptionTwo}
-            onChange={this.selectChangeTwo}
-          />
-          <Select
-            options={rating}
-            placeholder="Rating"
-            value={selectedOptionThree}
-            onChange={this.selectChangeThree}
-          /> */}
+         
           <input
             type="text"
             name="comments"
@@ -238,12 +160,10 @@ export class AddNewForm extends Component {
             value={this.state.info}
             onChange={this.handleChange}
           />
-          <input type="file" onChange={this.fileSelectedHandler} />
-          <button onClick={this.fileUploadHandler} style={buttonStyle}>
-            Upload Photo!
-          </button>
+        
           
-          <button style={buttonStyle} type='submit'>Add New</button>
+          <button style={buttonStyle} type='submit' onClick={console.log('added!')}>Add New</button>
+          <button style={buttonStyle}><Link to='/add-new'>Add Another</Link></button>
           <button style={buttonStyle}><Link to='/'>Return to Home</Link></button>
         </form>
       </div>
