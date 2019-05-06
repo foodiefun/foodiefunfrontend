@@ -26,15 +26,15 @@ export class Main extends Component {
     };
   }
 
- // componentDidMount() {
-//     this.props.getData();
-//     const token = localStorage.getItem('token');
-//     const decoded = jwt_decode(token);
-//     this.setState({
-//       name: decoded.name,
-//       email: decoded.email
-//     });
-//   }
+ componentDidMount() {
+    this.props.getData();
+    const token = localStorage.getItem('token');
+    const decoded = jwt_decode(token);
+    this.setState({
+      name: decoded.name,
+      email: decoded.email
+    });
+  }
 
   render() {
     
