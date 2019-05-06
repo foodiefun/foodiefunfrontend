@@ -19,9 +19,10 @@ function App() {
         <Route exact path="/login" render={props => <Login {...props} />} />
 
         <Route exact path="/register" component={Register} />
-        {localStorage.getItem("jwt") ? (
-          <Route exact path="/" component={Main} />
-        ) : null}
+        <Route exact path="/" component={Main} />
+//         {localStorage.getItem("jwt") ? (
+//           <Route exact path="/" component={Main} />
+//         ) : null}
         
       </div>
     </Router>
