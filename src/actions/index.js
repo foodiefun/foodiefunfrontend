@@ -21,7 +21,7 @@ export const getData = () => dispatch => {
 
   axios
     .get(URL, {
-      headers: { Authorization: localStorage.getItem('token') }
+      //headers: { Authorization: localStorage.getItem('token') }
     })
     .then(res => {
       console.log(res);
@@ -48,7 +48,7 @@ export const addFoodie = foodie => dispatch => {
 
   axios
     .post(`https://foodiefun.herokuapp.com/api/user/review`, foodie, {
-      headers: { Authorization: localStorage.getItem('token') }
+//       headers: { Authorization: localStorage.getItem('token') }
     })
     .then(res => {
       dispatch({ type: FOODIE_ADD, payload: res.data });
@@ -63,7 +63,7 @@ export const updateFoodie = (reviewId, foodie) => dispatch => {
   console.log(reviewId, foodie)
   axios
     .put(`https://foodiefun.herokuapp.com/api/review/${reviewId}`, foodie, {
-      headers: { Authorization: localStorage.getItem('token') }
+      //headers: { Authorization: localStorage.getItem('token') }
     })
     .then(res =>
       dispatch({
@@ -80,7 +80,7 @@ export const updateFoodie = (reviewId, foodie) => dispatch => {
 export const deletePost = id => dispatch => {
   axios
     .delete(`https://foodiefun.herokuapp.com/api/review/${id}`, {
-      headers: { Authorization: localStorage.getItem('token') }
+      //headers: { Authorization: localStorage.getItem('token') }
     })
     .then(res => {
       dispatch({ type: FOODIE_DELETE, payload: res.data });
