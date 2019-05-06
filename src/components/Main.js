@@ -8,7 +8,7 @@ import { Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { getData, deletePost } from '../actions';
-import jwt_decode from 'jwt-decode';
+//import jwt_decode from 'jwt-decode';
 
 
 // import  fetchReducer from '../reducers';
@@ -26,15 +26,15 @@ export class Main extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.getData();
-    const token = localStorage.getItem('token');
-    const decoded = jwt_decode(token);
-    this.setState({
-      name: decoded.name,
-      email: decoded.email
-    });
-  }
+ // componentDidMount() {
+//     this.props.getData();
+//     const token = localStorage.getItem('token');
+//     const decoded = jwt_decode(token);
+//     this.setState({
+//       name: decoded.name,
+//       email: decoded.email
+//     });
+//   }
 
   render() {
     
