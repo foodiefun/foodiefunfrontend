@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { withRouter } from 'react-router-dom';
-// import { registerUser } from '../actions/Authentication';
 import { register } from './AxiosLogin';
-
+import '../App.css';
 
 
 class Register extends Component {
@@ -39,11 +37,13 @@ class Register extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="container" style={{ marginTop: '50px', width: '700px' }}>
-        <h2 style={{ marginBottom: '40px' }}>Registration</h2>
+     
+      <div className="register">
+        <h4>Registration</h4>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <input
+            style={inputStyle}
               type="text"
               placeholder="Username"
               name="username"
@@ -57,6 +57,7 @@ class Register extends Component {
            
           <div className="form-group">
             <input
+            style={inputStyle}
               type="password"
               placeholder="Password"
               name="password"
@@ -71,7 +72,7 @@ class Register extends Component {
            
           </div>
           <div className="form-group">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" style={buttonStyle}>
               Register User
             </button>
           </div>
@@ -81,9 +82,23 @@ class Register extends Component {
   }
 }
 
-
-
 export default connect(
   null,
   { register }
 )(withRouter(Register));
+
+const inputStyle = {
+  border: '#232A34 1px solid',
+  borderRadius: '5px',
+  margin:'2px',
+  padding: '10px',
+};
+
+const buttonStyle ={
+color: '#232A34',
+background: '#F1F3D7',
+border: '#232A34 1px solid',
+borderRadius: '5px',
+padding: '10px',
+margin: '5px',
+}

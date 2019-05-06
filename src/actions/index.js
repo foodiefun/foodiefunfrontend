@@ -11,6 +11,9 @@ export const FOODIE_UPDATE = 'FOODIE_UPDATE';
 export const SEARCH = "SEARCH";
 
 let id = localStorage.getItem('userId');
+let postId = localStorage.getItem('reviewId')
+
+
 
 export const getData = () => dispatch => {
   const URL = `https://foodiefun.herokuapp.com/api/user/${id}/reviews`;
@@ -28,7 +31,7 @@ export const getData = () => dispatch => {
       });
     })
     .catch(err => {
-      console.log(err);
+      console.log(err, 'line 31 error');
       if (err.response.status === 403) {
         dispatch({ type: FOODIE_UNAUTH, payload: err.response });
       } else {
@@ -38,32 +41,7 @@ export const getData = () => dispatch => {
 };
 export default getData;
 
-//   // LOGIN
-// export const LOGIN_START = 'LOGIN_START';
-// export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-// export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
-// export const login = creds => dispatch => {
-//  dispatch({ type: LOGIN_START });
-
-//   return axios
-//     .post(URL, creds)
-//     .then(res => {
-//       console.log(res);
-//       localStorage.setItem('token', res.data.payload);
-//       dispatch({ type: LOGIN_SUCCESS, payload: res.data.payload });
-
-//     })
-//     .catch(err => {
-//       console.log('login err: ', err);
-//       if (err.response && err.response.status === 403) {
-//         localStorage.removeItem('token');
-//       }
-//       dispatch({ type: LOGIN_FAILURE });
-//     });
-// };
-
-//ADD
 
 export const addFoodie = foodie => dispatch => {
   dispatch({ type: FOODIE_ADD });
@@ -81,9 +59,10 @@ export const addFoodie = foodie => dispatch => {
 };
 
 //EDIT
-export const updateFoodie = (id, foodie) => dispatch => {
+export const updateFoodie = (reviewId, foodie) => dispatch => {
+  console.log(reviewId, foodie)
   axios
-    .put(`https://foodiefun.herokuapp.com/api/user/${id}/review`, foodie, {
+    .put(`https://foodiefun.herokuapp.com/api/review/${reviewId}`, foodie, {
       headers: { Authorization: localStorage.getItem('token') }
     })
     .then(res =>

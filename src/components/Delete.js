@@ -13,7 +13,7 @@ deletePost = e => {
   render() {
     return (
       <div>
-         <button className='delete' onClick={()=>this.deletePost()}>Delete</button>
+         <i className="fas fa-ban" onClick={()=>this.deletePost()}></i>
       </div>
     )
   }

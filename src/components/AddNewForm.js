@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import { addFoodie } from '../actions';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import '../App.css';
 
-
-const foobar = localStorage.getItem('userId')
-
-
+const foobar = localStorage.getItem('userId');
 
 export class AddNewForm extends Component {
   constructor() {
@@ -35,14 +33,12 @@ export class AddNewForm extends Component {
     });
   };
 
-
   componentDidMount() {
     this.setState({
       id: Date.now(),
       userId: foobar
-    })
+    });
   }
-
 
   addReview = e => {
     e.preventDefault();
@@ -61,22 +57,15 @@ export class AddNewForm extends Component {
       userId: foobar
     });
 
-    let data = {...this.state} ;
+    let data = { ...this.state };
     this.props.addFoodie(data);
-    
-   
-    console.log(this.state)
+
+    console.log(this.state);
   };
 
-
-
-
-
-
   render() {
-   
     return (
-      <div>
+      <div className="editFoodForm" style={formStyle}>
         <form style={formStyle} onSubmit={this.addReview}>
           <input
             type="text"
@@ -94,7 +83,7 @@ export class AddNewForm extends Component {
             value={this.state.date}
             onChange={this.handleChange}
           />
-           <input
+          <input
             type="text"
             name="foodType"
             style={inputStyle}
@@ -102,23 +91,8 @@ export class AddNewForm extends Component {
             value={this.state.foodType}
             onChange={this.handleChange}
           />
-          {/* <label>
-            <input type='radio' value='option1' checked={this.state.foodType === 'Chinese'}  onChange={this.handleChange}/>
-            Chinese
-          </label>
-          <label>
-          <input type='radio' value='option2' checked={this.state.foodType === 'Mexican'} onChange={this.handleChange}/>
-            Mexican
-          </label>
-          <label>
-          <input type='radio' value='option3' checked={this.state.foodType === 'Italian'} onChange={this.handleChange}/>
-            Italian
-          </label> */}
 
-          
-
-
-            <input
+          <input
             type="number"
             name="Price"
             style={inputStyle}
@@ -126,7 +100,7 @@ export class AddNewForm extends Component {
             value={this.state.price}
             onChange={this.handleChange}
           />
-            <input
+          <input
             type="number"
             name="rating"
             style={inputStyle}
@@ -143,13 +117,12 @@ export class AddNewForm extends Component {
             onChange={this.handleChange}
           />
 
-         
           <input
             type="text"
             name="comments"
             style={inputStyle}
             placeholder="Comments"
-            value={this.state.comment}
+            value={this.state.comments}
             onChange={this.handleChange}
           />
           <input
@@ -157,14 +130,28 @@ export class AddNewForm extends Component {
             name="restaurantInfo"
             style={inputStyle}
             placeholder="Info"
-            value={this.state.info}
+            value={this.state.restaurantInfo}
             onChange={this.handleChange}
           />
-        
-          
-          <button style={buttonStyle} type='submit' onClick={console.log('added!')}>Add New</button>
-          <button style={buttonStyle}><Link to='/add-new'>Add Another</Link></button>
-          <button style={buttonStyle}><Link to='/'>Return to Home</Link></button>
+
+          <button
+            style={submitButtonStyle}
+            type="submit"
+            onClick={console.log('added!')}
+          >
+            Submit
+          </button>
+          <button style={buttonStyle}>
+            {' '}
+            <Link style={linkButton} to="/add-new">
+              Add Another
+            </Link>
+          </button>
+          <button style={buttonStyle}>
+            <Link style={linkButton} to="/">
+              Return to Home
+            </Link>
+          </button>
         </form>
       </div>
     );
@@ -183,17 +170,36 @@ export default connect(
 const formStyle = {
   display: 'flex',
   flexDirection: 'column',
-  margin: '20px'
+  background: '#F1F3D7',
+  padding: '30px',
+  margin: '0px',
+  height: '800px'
 };
 
-const inputStyle = {
-  margin: '8px',
-  padding: '10px'
-};
-
-const buttonStyle = {
+const submitButtonStyle = {
+  color: '#232A34',
+  background: '#F1F3D7',
+  border: '#232A34 1px solid',
+  borderRadius: '5px',
   padding: '10px',
-  width: '300px',
-  margin: 'auto',
-  marginBottom: '15px'
+  margin: '5px'
+};
+const buttonStyle = {
+  color: '#232A34',
+  background: '#F1F3D7',
+  border: '#232A34 1px solid',
+  borderRadius: '5px',
+  padding: '10px',
+  margin: '5px'
+};
+
+const linkButton = {
+  textDecoration: 'none',
+  color: 'black'
+};
+const inputStyle = {
+  border: '#232A34 1px solid',
+  borderRadius: '5px',
+  margin: '2px',
+  padding: '10px'
 };

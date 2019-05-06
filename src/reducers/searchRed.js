@@ -9,6 +9,7 @@ const initialState = {
 export function searchReducer(state = initialState, action) {
     switch (action.type) {
         case SEARCH:
+            console.log("searchin for posts", action.payload)
             return { ...state, search: action.payload };
     
 

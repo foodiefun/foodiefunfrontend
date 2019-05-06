@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 import { login } from './AxiosLogin';
-
 import { connect } from 'react-redux';
 // import { login } from '../actions/index';
 import { Link } from 'react-router-dom';
+import '../App.css';
 
 export class LoginForm extends Component {
   constructor() {
@@ -23,7 +23,7 @@ export class LoginForm extends Component {
 
   handleLogin = e => {
     e.preventDefault();
-    console.log('login!!')
+    console.log('login!!');
     const user = {
       username: this.state.username,
       password: this.state.password
@@ -50,30 +50,17 @@ export class LoginForm extends Component {
               style={inputStyle}
             />
             <input
-              type="text"
+              type="password"
               name="password"
               value={this.state.password}
               onChange={this.handleChange}
               placeholder="Password"
               style={inputStyle}
             />
-            <button>
-              {' '}
-              Login
-              {/* {this.props.isLoggingIn ? (
-                <img
-                  src="https://ya-webdesign.com/images/minimalist-transparent-loading-gif-11.gif"
-                  alt=""
-                  loadDots
-                />
-              ) : (
-                'Login'
-              )} */}
-            </button>
-            {this.props.error && <p className="error">{this.props.error}</p>}
-            <p>Forgot your Password?</p>
-            <button>
-              <Link to="/register">Create Account</Link>
+            <button style={buttonStyle}>Login</button>
+
+            <button style={buttonStyle}>
+              <Link to="/register" style={linkStyle}>Create Account</Link>
             </button>
           </form>
         </div>
@@ -98,7 +85,27 @@ const loginform = {
   justifyContent: 'center',
   width: '250px',
   margin: 'auto',
-  marginTop: '80px'
+  marginTop: '20px'
 };
 
-const inputStyle = {};
+const inputStyle = {
+  border: '#232A34 1px solid',
+  borderRadius: '5px',
+  margin:'2px',
+  padding: '10px',
+};
+
+const buttonStyle ={
+color: '#232A34',
+background: '#F1F3D7',
+border: '#232A34 1px solid',
+borderRadius: '5px',
+padding: '10px',
+margin: '5px',
+
+}
+
+const linkStyle ={
+  textDecoration: 'none',
+  color: '#232A34'
+}

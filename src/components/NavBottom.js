@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import '../index.css';
 
 class NavBottom extends Component {
 logOut(e){
@@ -12,11 +13,10 @@ logOut(e){
 
 render() {
    return(
-    <div style={navb}>
+    <div className='bottomnav' >
     <Link to='/'> <i className="fas fa-home"></i></Link>
     <Link to='/add-new'> <i className="fas fa-plus-circle"></i></Link>
-    {/* <Link to="/edit"> <i className="far fa-edit"></i></Link> */}
-     <i className="fas fa-sign-out-alt" onClick={this.logOut.bind(this)}></i>
+    <Link to='/login'> <i className="fas fa-sign-out-alt" ></i></Link>
    </div>
 
    )
@@ -25,12 +25,5 @@ render() {
 
 export default NavBottom
 
-const navb = {
-  width: '100%',
-  fontSize: '4rem',
-  display: 'flex',
-  justifyContent: 'space-between',
-  backgroundColor: '#F1F3D7',
-  textShadow: ''
-}
+
 

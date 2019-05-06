@@ -15,7 +15,6 @@ import {Link} from 'react-router-dom';
         id: null,
         restaurantName: '',
         photo: '',
-        foodName: '',
         foodType: '',
         comments: '',
         rating: null,
@@ -30,14 +29,13 @@ import {Link} from 'react-router-dom';
 
 
   componentDidMount() {
-    console.log(this.props.post)
+   
      this.props.post && this.setState({
         id: this.props.post.id,
         restaurantName: this.props.post.restaurantName,
         photo: this.props.post.photo,
-        foodName: this.props.foodName,
         foodType: this.props.post.foodType,
-        comments:this.props.comment,
+        comments:this.props.post.comments,
         rating: this.props.post.rating,
         price: this.props.post.price,
         date:this.props.post.date,
@@ -64,16 +62,19 @@ import {Link} from 'react-router-dom';
     
     
     }
-    editPost = e => {
-      this.props.updateFoodie(this.props.id)
+    editPost = () => {
+      console.log(this.props.post.id)
+      this.props.updateFoodie(this.props.post.id)
+      
     }
+    
    
   
     render() {
     
       return (
         <div>
-        <form style={formStyle} onSubmit={this.addReview}>
+        <form style={formStyle} onSubmit={this.editPost}>
           <input
             type="text"
             name="restaurantName"
@@ -128,7 +129,7 @@ import {Link} from 'react-router-dom';
             name="comments"
             style={inputStyle}
             placeholder="Comments"
-            value={this.state.comment}
+            value={this.state.comments}
             onChange={this.handleChange}
           />
           <input
@@ -136,12 +137,12 @@ import {Link} from 'react-router-dom';
             name="restaurantInfo"
             style={inputStyle}
             placeholder="Info"
-            value={this.state.info}
+            value={this.state.restrauntInfo}
             onChange={this.handleChange}
           />
           
-          <button style={buttonStyle} type='submit'>Update!</button>
-          <button style={buttonStyle}><Link to='/'>Return to Home</Link></button>
+          <button style={buttonStyle} type='submit' >Update!</button>
+          <button style={buttonStyle}><Link style={linkButton}to='/'>Return to Home</Link></button>
         </form>
       </div>
       );
@@ -161,41 +162,33 @@ import {Link} from 'react-router-dom';
   const formStyle = {
     display: 'flex',
     flexDirection: 'column',
-    margin: '20px'
+    background: '#F1F3D7',
+    padding: '30px',
+    margin: '0px',
+    
+  
   };
   
   const inputStyle = {
-    margin: '8px',
-    padding: '10px'
+  border: '#232A34 1px solid',
+  borderRadius: '5px',
+  margin:'2px',
+  padding: '10px',
   };
   
   const buttonStyle = {
+    color: '#232A34',
+    background: '#F1F3D7',
+    border: '#232A34 1px solid',
+    borderRadius: '5px',
     padding: '10px',
-    width: '300px',
-    margin: 'auto',
-    marginBottom: '15px'
+    margin: '5px'
+    
+    
   };
   
+const linkButton = {
+  textDecoration: 'none',
+  color: 'black'
+}
 
-
-  // class Edit extends Component {
-  //   constructor(props){
-  //     super(props);
-    
-  //   }
-    
-    
-  //     editPost = e => {
-  //       this.props.updateFoodie(this.props.id)
-  //     }
-      
-  //       render() {
-  //         return (
-  //           <div>
-  //             <Link to=''> <button onClick={()=>this.editPost()}>Edit</button></Link>
-  //           </div>
-  //         )
-  //       }
-  //     }
-      
-  //     export default connect(null, {updateFoodie})(Edit)

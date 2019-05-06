@@ -4,35 +4,46 @@ import Delete from './Delete';
 import Search from './Search';
 import '../App.css';
 
+
+
 const FoodList = props => {
+  
+
+  
   return (
-    <>
+    
+    <div className='foodList'>
+    
     <Search posts={props.posts}/>
     {props.posts.map(post => (
-      <div key={post.id}>
+      <div key={post.id} className='foodCard'>
         <h2 className='heading'>{post.restaurantName}</h2>
         <img className='image' src={post.photo} alt="alt" style={imageStyle} />
+        <div className='editdelete'>
         <Delete id={post.id} />
-        {/* <Edit post={post} /> */}
-        <Link to={`/edit/${post.id}`}> Edit </Link>
-        <p className='postText'>Date Visited - {post.date}</p>
-        <p className='postText'>Price {post.price}</p>
-        <p className='postText'>Rating {post.rating}</p>
-        <h4 className='postText'>Restaurant Info</h4>
-        <p className='postText'>{post.restaurantInfo}</p>
+        <Link to={`/edit/${post.id}`}> <i className="far fa-edit"></i> </Link>
+        </div> 
+        <h5>Date Visited</h5>  
+        <p className='postText'> {post.date}</p>
+        <h5>Price</h5>  
+        <p className='postText'> {post.price}</p>
+        <h5>Rating</h5>  
+        <p className='postText'> {post.rating}</p>
+        <h5>Comments</h5>  
+        <p className='postText'>{post.comments}</p>
+        <h5>Restaurant Info</h5>  
+        <p className='postText'> {post.restaurantInfo}</p>
       </div>
     ))}
-    </>
+    </div>
   )
 }
 
 export default FoodList;
 
-
-
-
-
 const imageStyle = {
-  width: '400px',
-  height: '300px'
+  width: '350px',
+  height: '240px',
+  borderRadius: '5px',
+  border: '#B5223D 1px solid'
 };

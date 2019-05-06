@@ -1,14 +1,14 @@
 import React from 'react';
-import foodiefunlogolong from  '../assets/foodiefunlogolong.svg';
+import foodiefunlogored from  '../assets/foodiefunlogored.svg';
 import NavLeft from './NavLeft';
 import NavRight from './NavRight'
-
+import '../index.css'
 
 function Nav() {
   return (
     <div style={navStyle}>
      <NavLeft/>
-      <img src={foodiefunlogolong} alt="main logo" style={logoStyle}/>
+      <img src={foodiefunlogored} alt="main logo" style={logoStyle}/>
       <NavRight/>
     </div>
   )
@@ -17,14 +17,13 @@ function Nav() {
 export default Nav
 
 const navStyle ={
-  backgroundColor: '#75B207',
+  backgroundColor: '#F1F3D7',
   margin: '0px',
   display: 'flex',
   alignItems: 'center',
   justifyContent:'space-between',
   padding: '10px',
-  filter: 'drop-shadow(0px 3px 3px rgba(0, 0, 0, 1))'
-
+  filter: 'drop-shadow(0px 3px 3px rgba(0, 0, 0, 1))',
 }
 
 const logoStyle = {

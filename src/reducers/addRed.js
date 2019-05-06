@@ -2,8 +2,7 @@ import {FOODIE_ADD} from '../actions';
 import {FOODIE_ADDED } from '../actions';
 import { FOODIE_DELETE } from '../actions';
 import {FOODIE_UPDATE} from '../actions';
-// import {browserHistory} from 'react-router';
-// import { browserRouter, Link, Route } from 'react-router-dom';
+
 
 const initialState = {
     restaurant: [],
