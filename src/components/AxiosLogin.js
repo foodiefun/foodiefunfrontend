@@ -22,8 +22,9 @@ export const login = user => {
       password: user.password
     })
     .then(response => {
-      localStorage.setItem('token', response.data.token);
-      return response.data.token;
+//       localStorage.setItem('token', response.data.token);
+//       return response.data.token;
+    res.status(200).json({message: "sucessful login"});
     })
     .catch(err => {
       console.log(err);
